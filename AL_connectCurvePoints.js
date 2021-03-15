@@ -3,15 +3,7 @@ function AL_connectCurvePoints(){
 	//USES OPENHARMONY
 
 	// VARIABLES 
-	
-	var DOC = $.scn ;
-	var INPUT_COLUMN = "";
-	var OUTPUT_COLUMN ="";	
-	var EXPRESSION_COLUMN = "";
-	var CYCLE= 360;
-	var LENGTH= 10;
-	var avaible_columns = [];
-	var avaible_attributes = [];
+
 	
 	// EXECUTIONS
 	
