@@ -7,10 +7,12 @@ function AL_connectCurvePoints(){
 	
 	// EXECUTIONS
 	
+	//todo : add color picker and mark every curvepoint with rhe same color 
+	
 	MessageLog.trace('test');
 	
-	var avaible_X_columns = filter_columns_by_type(fetch_X_columns(DOC.selectedNodes),["3DPATH","BEZIER","EASE","QUATERNIONPATH"]);
-	var avaible_Y_columns = filter_columns_by_type(fetch_Y_columns(DOC.selectedNodes),["3DPATH","BEZIER","EASE","QUATERNIONPATH"]);
+	var avaible_X_columns = filter_columns_by_type(fetch_X_columns($.scene.selectedNodes),["3DPATH","BEZIER","EASE","QUATERNIONPATH"]);
+	var avaible_Y_columns = filter_columns_by_type(fetch_Y_columns($.scene.selectedNodes),["3DPATH","BEZIER","EASE","QUATERNIONPATH"]);
 	
 	var select_column_listX =[]
 	var select_column_listY= []
@@ -60,7 +62,7 @@ function AL_connectCurvePoints(){
 			var selected_column_index_Y = select_column_listY.indexOf(INPUTY.currentItem);
 
 			var INPUT_COLUMN_X = avaible_X_columns[selected_column_index_X];
-			var INPUT_COLUMN_Y = avaible_X_columns[selected_column_index_Y];
+			var INPUT_COLUMN_Y = avaible_Y_columns[selected_column_index_Y];
 	
 			MessageLog.trace("INPUT_COLUMN");
 			MessageLog.trace(INPUT_COLUMN_X.display);
@@ -69,9 +71,9 @@ function AL_connectCurvePoints(){
 			var source_column_x = INPUT_COLUMN_X.name
 			var source_column_y = INPUT_COLUMN_Y.name
 			
-			for(var i = 1 ; i < DOC.selectedNodes.length ; i++){
-				node.linkAttr(DOC.selectedNodes[i].path, "offset.X", source_column_x);	
-				node.linkAttr(DOC.selectedNodes[i].path, "offset.Y", source_column_y);	
+			for(var i = 0 ; i < $.scene.selectedNodes.length ; i++){
+				node.linkAttr($.scene.selectedNodes[i].path, "offset.X", source_column_x);	
+				node.linkAttr($.scene.selectedNodes[i].path, "offset.Y", source_column_y);	
 				
 			}
 
@@ -131,7 +133,7 @@ function AL_connectCurvePoints(){
 			
 			var attribute_name = attrList[i]
 			
-			if(attribute_name == "offset.Y"){
+			if(attribute_name == "offset.Y"  || attribute_name == "POSITION.Y"){
 				
 				var linked_column = node.linkedColumn(_node,attribute_name)
 				
@@ -167,7 +169,7 @@ function AL_connectCurvePoints(){
 			
 			var attribute_name = attrList[i]
 			
-			if(attribute_name == "offset.X"){
+			if(attribute_name == "offset.X" || attribute_name == "POSITION.X"){
 				
 				var linked_column = node.linkedColumn(_node,attribute_name)
 				
